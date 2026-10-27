@@ -1,0 +1,13 @@
+[project]
+name = "biocompute-outlier-labs"
+version = "0.1.0"
+description = "Biocompute experiments against the Cortical Labs cl SDK"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "cl-sdk==1.0.0",
+]
+
+[tool.uv]
+package = false
