@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# .env is committed in this repo: it selects the default cl SDK simulator
+# data source (see src/organoid_simulator/README.md). Keep secrets out of it.
+!.env
