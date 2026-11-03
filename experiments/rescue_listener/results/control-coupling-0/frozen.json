@@ -1,0 +1,105 @@
+{
+ "omission": {
+  "config": {
+   "design": {
+    "histories_ms": {
+     "A": [
+      0,
+      200,
+      400,
+      600
+     ],
+     "B": [
+      0,
+      100,
+      500,
+      600
+     ]
+    },
+    "probe_ms": 800,
+    "onset_s": 3.0,
+    "blocks": 30,
+    "blocks_short": 20,
+    "y_window_ms": [
+     20,
+     250
+    ],
+    "y_window_start_if_electrical_ms": 40,
+    "sub_windows_ms": [
+     [
+      20,
+      60
+     ],
+     [
+      60,
+      250
+     ]
+    ],
+    "select_window_ms": [
+     40,
+     250
+    ],
+    "read_cap": null,
+    "jitter_check": {
+     "pulses": 20,
+     "spacing_ms": 250,
+     "window_ms": [
+      20,
+      40
+     ],
+     "min_share": 0.5,
+     "max_sd_ms": 1.0
+    },
+    "quiet_s": 5.0,
+    "burst_lookback_ms": 1000,
+    "burst_bin_ms": 50,
+    "burst_sd": 5.0,
+    "sign_flips": 20000
+   },
+   "input": 27,
+   "read": [
+    9,
+    10,
+    11,
+    13,
+    14,
+    15,
+    29,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    39,
+    41,
+    42,
+    44,
+    47,
+    48,
+    52,
+    58,
+    61,
+    62
+   ],
+   "scan_drive": 63.0,
+   "y_window_ms": [
+    20,
+    250
+   ],
+   "electrical": [],
+   "burst_threshold": 26,
+   "seed": 0,
+   "blocks": 30,
+   "source": "cl-sdk simulator",
+   "stim": {
+    "us_per_phase": 160,
+    "ua": 2.0
+   },
+   "spike_detection": "the device's own detector, unchanged by this code during the run"
+  },
+  "sha256": "86b0d0d87ed05fe0ad85b70af56dc82bde4189443a271df0dd56d763cdae4e36",
+  "frozen_at": "2026-11-03T20:22:51+00:00"
+ }
+}
