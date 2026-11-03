@@ -1,0 +1,81 @@
+{
+  "protocol": "audio_reservoir_v1",
+  "source": "reactive_sim",
+  "provenance": "SIMULATED MODEL",
+  "is_living_tissue": false,
+  "seed": 123,
+  "input": {
+    "synthetic speech (macOS text-to-speech)": 84,
+    "recorded human speech": 0
+  },
+  "n_speakers": 21,
+  "test_speakers": [
+    "tts:Aman",
+    "tts:Eddy",
+    "tts:Fred",
+    "tts:Grandma",
+    "tts:Grandpa",
+    "tts:Samantha",
+    "tts:Sandy"
+  ],
+  "results": {
+    "neural": {
+      "n": 28,
+      "correct": 22,
+      "accuracy": 0.7857142857142857,
+      "balanced_accuracy": 0.7857142857142857,
+      "ci95": [
+        0.5904689734941717,
+        0.9170393876123615
+      ],
+      "status": "ok",
+      "tts_correct": "22/28"
+    },
+    "input_only": {
+      "n": 28,
+      "correct": 26,
+      "accuracy": 0.9285714285714286,
+      "balanced_accuracy": 0.9285714285714286,
+      "ci95": [
+        0.7649652268254092,
+        0.9912295032964729
+      ],
+      "status": "ok",
+      "tts_correct": "26/28"
+    },
+    "unmasked": {
+      "n": 28,
+      "correct": 24,
+      "accuracy": 0.8571428571428571,
+      "balanced_accuracy": 0.8571428571428572,
+      "ci95": [
+        0.6733473306842047,
+        0.9596643692029087
+      ],
+      "status": "ok",
+      "tts_correct": "24/28"
+    },
+    "permuted": {
+      "null_mean": 0.5005357142857143,
+      "null_p95": 0.6785714285714286,
+      "p_value": 0.014925373134328358,
+      "n_perm": 200
+    },
+    "artifact_only": {
+      "n": 28,
+      "correct": 13,
+      "accuracy": 0.4642857142857143,
+      "balanced_accuracy": 0.4642857142857143,
+      "ci95": [
+        0.27510856029659614,
+        0.6613009238854
+      ],
+      "status": "ok",
+      "tts_correct": "13/28"
+    }
+  },
+  "notes": [
+    "SIMULATED: any advantage of the culture over input_only exists by model construction.",
+    "No claim that cells hear, understand or learn speech; the readout is the only trained part."
+  ]
+}

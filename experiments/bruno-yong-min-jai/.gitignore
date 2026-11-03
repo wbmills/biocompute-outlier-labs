@@ -1,0 +1,9 @@
+.venv/
+runs/*
+!runs/.gitkeep
+__pycache__/
+.pytest_cache/
+*.zip
+.env
+.DS_Store
+data/audio/

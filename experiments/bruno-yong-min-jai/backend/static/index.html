@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroHear</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 40 24%27%3E%3Cpath d=%27M1 12h7l3-9 4 18 4-14 3 5h17%27 fill=%27none%27 stroke=%27%23d6246e%27 stroke-width=%273%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="logo" aria-hidden="true"><svg viewBox="0 0 40 24" width="40" height="24"><path d="M1 12h7l3-9 4 18 4-14 3 5h17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
+    <div>
+      <h1>NeuroHear</h1>
+      <p class="sub">Adaptive neural I/O: compile a message into pulses, read it back from the response</p>
+    </div>
+  </div>
+  <div id="prov" class="prov" title="Where every number on this screen comes from">
+    <span id="provText">CONNECTING</span>
+  </div>
+  <dl class="meta">
+    <div><dt>State</dt><dd id="mState">—</dd></div>
+    <div><dt>Run</dt><dd id="mRun">—</dd></div>
+    <div><dt>Seed</dt><dd id="mSeed">—</dd></div>
+    <div><dt>Source</dt><dd>
+      <select id="sourceSel" aria-label="Data source">
+        <option value="reactive_sim">Reactive model</option>
+        <option value="sdk_random">Random (stim-independent)</option>
+        <option value="replay">Replay a run</option>
+        <option value="cl_sdk_sim">cl-sdk simulator</option>
+        <option value="live_cl1">Live CL1</option>
+      </select></dd></div>
+  </dl>
+  <button id="stopBtn" class="stop">Stop</button>
+</header>
+
+<main class="grid">
+  <!-- LEFT: human input -> electrical encoding -->
+  <section class="panel input">
+    <h2>Human input</h2>
+    <div class="mic">
+      <button id="micBtn" class="mic-btn" aria-pressed="false">
+        <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <span id="micLabel">Say yes or no</span>
+      </button>
+      <canvas id="wave" width="360" height="56" aria-label="Microphone level"></canvas>
+      <p id="micNote" class="note">Microphone and speech recognition are conventional software. The interesting step starts after the label is chosen.</p>
+    </div>
+    <div class="token-row">
+      <button class="token" data-label="YES">Yes</button>
+      <button class="token" data-label="NO">No</button>
+    </div>
+    <p class="chosen">Message: <strong id="chosen">none chosen</strong> <span id="chosenHow" class="how"></span></p>
+    <button id="sendBtn" class="send" disabled>Send to neurons</button>
+    <button id="speakBtn" class="send">Speak into the culture (raw audio)</button>
+    <p id="speakNote" class="note">Records 1.5 s and sends the sound itself, not a recognised word: 8 frequency bands &times; 5 time slices become pulses. The system is never told which word you said. Audio is not saved.</p>
+
+    <h2 class="mt">Electrical encoding</h2>
+    <p class="enc-name"><span id="encId">—</span> <span id="encDesc" class="how"></span></p>
+    <canvas id="pulse" width="360" height="150" aria-label="Pulse pattern, channel by time"></canvas>
+    <p id="budget" class="note"></p>
+  </section>
+
+  <!-- CENTRE: neural output -->
+  <section class="panel output">
+    <div class="out-head">
+      <h2>Neural response</h2>
+      <p id="trialInfo" class="note">No trial yet</p>
+    </div>
+    <canvas id="raster" width="900" height="560" aria-label="Spike raster, 64 channels by time"></canvas>
+    <ul class="legend">
+      <li><i class="k stim"></i>Stimulation pulse</li>
+      <li><i class="k art"></i>Artifact blanked (excluded)</li>
+      <li><i class="k win"></i>Decoder window</li>
+      <li><i class="k spk"></i>Spike</li>
+    </ul>
+    <p id="qflags" class="note"></p>
+  </section>
+
+  <!-- RIGHT: decoder + optimiser -->
+  <section class="panel decode">
+    <h2>Decoder readout</h2>
+    <div class="readout">
+      <div class="pred" id="pred">—</div>
+      <div class="pred-meta">
+        <div id="predProb" class="note">Send a message to see what the decoder recovers from the neural response alone.</div>
+        <div id="predTruth" class="truth"></div>
+      </div>
+    </div>
+
+    <div class="cards">
+      <article class="card" id="cardBase">
+        <h3>Baseline</h3>
+        <div class="big" id="baseAcc">—</div>
+        <div class="note" id="baseN">held-out test not run</div>
+      </article>
+      <article class="card chosen-card" id="cardWin">
+        <h3>Optimised</h3>
+        <div class="big" id="winAcc">—</div>
+        <div class="note" id="winN">held-out test not run</div>
+      </article>
+    </div>
+    <p id="verdict" class="verdict"></p>
+
+    <h2 class="mt">Candidate encodings <span class="how">validation, balanced accuracy</span></h2>
+    <div id="board" class="board"><p class="note">Run the baseline, then optimise.</p></div>
+
+    <h2 class="mt">Controls</h2>
+    <dl id="controls" class="controls"><p class="note">Appear after the locked test.</p></dl>
+  </section>
+</main>
+
+<footer class="bottom">
+  <ol class="steps">
+    <li><button data-act="preflight">Record spontaneous activity</button></li>
+    <li><button data-act="baseline">Run baseline</button></li>
+    <li><button data-act="optimise" class="primary">Optimise</button></li>
+    <li><button data-act="lock-test">Run locked test</button></li>
+  </ol>
+  <div class="aux">
+    <button data-act="run-all" class="ghost">Run full protocol</button>
+    <button id="resetBtn" class="ghost">Reset</button>
+    <button id="exportBtn" class="ghost">Export</button>
+  </div>
+  <div class="progress"><div id="bar"></div></div>
+  <p id="info" class="info"></p>
+</footer>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
