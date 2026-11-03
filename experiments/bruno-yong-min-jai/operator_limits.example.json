@@ -1,0 +1,11 @@
+{
+  "_comment": "TEMPLATE ONLY. The lab operator must supply every value. There is no safe default.",
+  "allowed_channels": [],
+  "max_current_uA": 0.0,
+  "max_phase_us": 0,
+  "max_pulses_per_trial": 0,
+  "min_inter_trial_s": 0,
+  "max_session_stims": 0,
+  "max_trial_span_ms": 0,
+  "approved_by": ""
+}
