@@ -73,7 +73,7 @@ config with a SHA-256 hash and timestamp in `frozen.json` before the first trial
 
 ## 4. Results
 
-### Connected network (coupling 4.0 mV), two runs of 20 blocks
+### Connected network (coupling 4.0 mV), three runs of 20 blocks
 
 **Run 1, through the live screen in real time (seed unset):** D = +2.8 spikes, 95% CI −2.9 to
 +8.6, sign-flip p = 0.34 (median +1.5). Raw trial file not attached.
@@ -92,6 +92,10 @@ config with a SHA-256 hash and timestamp in `frozen.json` before the first trial
 | Drift | first half −0.10, second half +0.60 |
 | Tail check: activity after the last history pulse vs Y | Spearman rho −0.21, p = 0.19 (A+ and B+ pooled) |
 | Decoder (secondary) | 6/20 = 30%, 95% CI 15–52% |
+
+**Run 3, live on the lead's laptop during judging (Windows, real time, seed unset)**, in
+`results/coupled-4mV-laptop-live/result.json`, saved from the running page's state: D = +3.0 spikes,
+95% CI −2.8 to +8.9, sign-flip p = 0.30 (median +2.0), 80 trials, 0 flagged; decoder 10/20 = 50%.
 
 **Result: no history effect measured in the connected network either.** Any history effect larger
 than about 3.4 spikes either way is ruled out at these settings.
