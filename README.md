@@ -134,3 +134,9 @@ mode) and its limitations.
 
 Simulator results are not evidence about CL1 tissue. Report them separately
 from device results.
+
+## Attention made of neurons (hackathon project)
+
+Can the simulated neurons do the matching step of attention themselves, rather
+than the computer around them? What we tried, the results, and what to try
+next are in [`docs/attention-brainslop.md`](docs/attention-brainslop.md).
