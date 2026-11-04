@@ -1,0 +1,17 @@
+source: cl-sdk simulator
+frozen 86b0d0d87ed0 at 2026-11-03T20:22:51+00:00: input 27, 24 read electrodes, Y window 20-250 ms (electrical: none), burst threshold 26 electrodes per 50 ms; 120 trials in 30 blocks, 0 flagged 
+means of raw Y (pooled spikes 20-250 ms after the probe slot): A+ 19.17, A- 19.87, B+ 18.37, B- 20.4
+PRIMARY D = (A+ - A-) - (B+ - B-): mean +1.33, 95% CI -1.82 to +4.47, p = 0.4, median +1.0, D > 0 in 60%, 30 blocks (two-sided sign flips)
+minimum detectable effect, 80% power: 4.5 spikes (sd of D 8.4)
+No history effect larger than 4.5 spikes either way in this simulated network tonight.
+sensitivity, no pre-onset bursts (0 trials out): mean +1.33, 95% CI -1.82 to +4.47, p = 0.4, median +1.0, D > 0 in 60%, 30 blocks
+sensitivity, baseline-subtracted: mean +4.07, 95% CI +0.20 to +7.90, p = 0.041, median +4.5, D > 0 in 60%, 30 blocks
+descriptive, Y[A-] - Y[B-] (leftover alone): mean -0.53, 95% CI -2.85 to +1.77, p = 0.65, median +1.0, D > 0 in 53%, 30 blocks
+descriptive, D in 20-60 ms: mean +0.80, 95% CI -0.56 to +2.17, p = 0.26, median +1.5, D > 0 in 63%, 30 blocks
+descriptive, D in 60-250 ms: mean +0.53, 95% CI -1.92 to +2.93, p = 0.68, median +1.0, D > 0 in 53%, 30 blocks
+drift: first half D +3.13 (15 blocks), second half -0.47 (15 blocks)
+bursts: 0 trials with one in the 1 s before onset, 0 burst bins inside trials; baseline 3.5 Hz per read electrode
+secondary (not the headline): decoder 17/30 = 57%, 95% CI 39%-73%, one-sided p = 0.29
+RESULT: no history effect measured (rule: primary sign-flip p < 0.05)
+LIF data source is using seed: 2272362786  [1:1 (64 neurons)]
+exit 0
